@@ -2,10 +2,11 @@ import json
 
 # Função para carregar os dados do faturamento diário de um arquivo JSON
 def carregar_dados(ficheiro):
-    print(ficheiro)
     with open(ficheiro, 'r') as file:
         # Carrega os dados do JSON
-        return json.load(file)
+        dados = json.load(file)
+        # Extrai os valores de faturamento (campo 'valor') de cada item no JSON
+        return [item['valor'] for item in dados]
 
 # Função para calcular o menor e maior faturamento, e o número de dias acima da média
 def analisar_faturamento(faturamentos):
@@ -30,7 +31,7 @@ def analisar_faturamento(faturamentos):
 # Função principal
 def main():
     # Caminho para o arquivo JSON contendo o faturamento diário
-    arquivo_faturamento = r'./faturamento.json'  # Substitua pelo caminho correto
+    arquivo_faturamento = r'./dados.json'  # Substitua pelo caminho correto
     
     # Carrega os dados do faturamento
     faturamentos = carregar_dados(arquivo_faturamento)
